@@ -16,4 +16,31 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
 import org.openqa.selenium.Keys as Keys
+import com.kms.katalon.core.testobject.ConditionType as ConditionType
 
+WebUI.openBrowser('google.com')
+
+WebUI.navigateToUrl('https://app.ease-healthcare.com/login/?redirect_to=https://app.ease-healthcare.com')
+
+WebUI.click(getObject('//*[@id="user_login_email"]'))
+
+WebUI.setText(getObject('//*[@id="user_login_email"]'), 'giang.le@rayyone.com')
+
+WebUI.click(getObject('//*[@id="wp-submit"]'))
+
+WebUI.delay(5)
+
+//def email = WebUI.getText(getObject('//*[@id="user_login"]'))
+//
+//WebUI.verifyEqual(email, 'giang.le@rayyone.com')
+
+WebUI.setText(getObject('//*[@id="user_pass"]'), 'rayyone168giangle1')
+
+WebUI.click(getObject('//*[@id="wp-submit"]'))
+
+WebUI.verifyTextPresent("ERROR: Incorrect email address or password.", false)
+WebUI.closeBrowser()
+def getObject(String obj) {
+    TestObject oB1 = new TestObject().addProperty('xpath', ConditionType.EQUALS, obj)
+    return oB1
+}
